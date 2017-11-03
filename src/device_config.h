@@ -16,8 +16,8 @@
 /* STATIC IP ADDRESS*/
 #define IP_ADDR0   192
 #define IP_ADDR1   168
-#define IP_ADDR2   1
-#define IP_ADDR3   99
+#define IP_ADDR2   168
+#define IP_ADDR3   44
 
 /* NETMASK */
 #define NETMASK_ADDR0   255
@@ -28,8 +28,8 @@
 /* GATEWAY ADDRESS */
 #define GW_ADDR0   192
 #define GW_ADDR1   168
-#define GW_ADDR2   1
-#define GW_ADDR3   100
+#define GW_ADDR2   169
+#define GW_ADDR3   1
 
 
 /* ROS NODE IDENTIFIER FOR THIS DEVICE */
@@ -38,7 +38,7 @@
 /* ADDRESS OF ROS MASTER (ROSCORE) */
 #define ROS_MASTER_IP_ADDR0   192
 #define ROS_MASTER_IP_ADDR1   168
-#define ROS_MASTER_IP_ADDR2   1
+#define ROS_MASTER_IP_ADDR2   169
 #define ROS_MASTER_IP_ADDR3   100
 #define SERVER_PORT_NUM 11311
 

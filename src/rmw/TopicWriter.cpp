@@ -19,6 +19,7 @@ TopicWriter::TopicWriter(const char* callerID, const char* topic, const char* ms
 
 	XMLRequest* req = new RegisterRequest("registerPublisher", ROS_MASTER_IP, callerID, topic, msgType);
 	XMLRPCServer::sendRequest(req->getData(), SERVER_PORT_NUM, connectSubscribers, this);
+    delete req;
 }
 void TopicWriter::serializeMsg(const ros::Msg& msg, unsigned char* outbuffer)
 {
@@ -129,6 +130,7 @@ void TopicWriter::connectSubscribers(const void* obj, const char* data)
 					// TODO: Send publisher update to each remote subscriber
 					XMLRequest* req = new PublisherUpdate(self->topic, uri);
 					XMLRPCServer::sendRequest(req->getData(), port);
+                    delete req;
 				}
 			}
 			pos = pos3;

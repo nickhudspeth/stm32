@@ -51,6 +51,9 @@ private:
 	{
 		qHandle = xQueueCreate(QUEUE_LEN, QUEUE_MSG_SIZE);
 	}
+    ~UDPHandler(){
+        delete _instance;
+    }
 public:
 	void enqueueMessage(const UDPMessage *msg)
 	{

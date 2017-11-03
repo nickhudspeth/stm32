@@ -75,14 +75,24 @@ protected:
 		}
 	}
 
-	char data[1500];
-	char header[256];
-	char xml[1024];
+    char data[1500];
+    char header[256];
+    char xml[1024];
+
+    // char *data = (char *)malloc(1500);
+    // char *header = (char *)malloc(256);
+    // char *xml = (char *)malloc(1024);
 public:
 	const char* getData()
 	{
 		return data;
 	}
+
+    // ~XMLRequest(){
+        // free(data);
+        // free(header);
+        // free(xml);
+    // }
 };
 
 class RegisterRequest : public XMLRequest

@@ -24,6 +24,7 @@ TopicReader::TopicReader(const char* callerID, const char* topic, const char* md
 	XMLRPCServer::sendRequest(req->getData(), SERVER_PORT_NUM, connectPublishers, this);
 	// TODO: make a unique task name
     xTaskCreate(task, (const signed char*)topic, 250, (void*)this, tskIDLE_PRIORITY + 2, NULL);
+    delete req;
 }
 
 void TopicReader::addCallback(void(*callback)(void* data, void* obj), void* obj)
@@ -128,6 +129,7 @@ void TopicReader::requestTopic(const char* ip, uint16_t serverPort)
 {
 	XMLRequest* req = new TopicRequest("requestTopic", ROS_MASTER_IP, callerID, topic, md5sum, msgType);
 	XMLRPCServer::sendRequest(req->getData(), serverPort, onResponse, this);
+    delete req;
 }
 
 void TopicReader::connectPublishers(const void* obj, const char* data)

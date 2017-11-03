@@ -489,6 +489,7 @@ void XMLRPCServer::XMLRPCServerReceiveCallback(const char* data, char* buffer)
                             os_printf("Connection ID: %d\n", connection->getID());
                             XMLRequest* response = new TopicResponse(IP_ADDR, UDP_LOCAL_PORT, connection->getID());
                             strcpy(buffer, response->getData());
+                            delete response;
                         }
                     }
                 }
