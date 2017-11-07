@@ -101,7 +101,7 @@ private:
     HTTPClient()
     {
         qHandle = xQueueCreate(4, sizeof(TCPData));
-        xTaskCreate(tcptask, (const signed char*)"HTTPClient", 1500, this, tskIDLE_PRIORITY + 2, NULL);
+        xTaskCreate(tcptask, (const char*)"HTTPClient", 1500, this, tskIDLE_PRIORITY + 2, NULL);
     }
 
     static HTTPClient* _instance;
@@ -259,7 +259,7 @@ public:
     {
         this->port = port;
         this->receiveCallback = receiveCallback;
-        xTaskCreate(tcptask, (const signed char*)taskName, 1600, this, tskIDLE_PRIORITY + 2, NULL);
+        xTaskCreate(tcptask, (const char*)taskName, 1600, this, tskIDLE_PRIORITY + 2, NULL);
     }
 
 };
@@ -556,10 +556,10 @@ void XMLRPCServer::XMLRPCServerReceiveCallback(const char* data, char* buffer)
 void XMLRPCServer::start()
 {
     HTTPServer* server = new HTTPServer("HTTPServer", XMLRPC_PORT, XMLRPCServerReceiveCallback);
-    xTaskCreate(UDPSend, (const signed char*)"UDPSend", 512, NULL, tskIDLE_PRIORITY + 2, NULL);
+    xTaskCreate(UDPSend, (const char*)"UDPSend", 512, NULL, tskIDLE_PRIORITY + 2, NULL);
     isUDPReceiveTaskCreated = false;
 
-    xTaskCreate(UDPreceive, (const signed char*)"UDPReceive", 256, NULL, tskIDLE_PRIORITY + 3, NULL);
+    xTaskCreate(UDPreceive, (const char*)"UDPReceive", 256, NULL, tskIDLE_PRIORITY + 3, NULL);
 
 }
 

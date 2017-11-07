@@ -23,7 +23,7 @@ TopicReader::TopicReader(const char* callerID, const char* topic, const char* md
 	XMLRequest* req = new RegisterRequest("registerSubscriber", ROS_MASTER_IP, callerID, topic, msgType);
 	XMLRPCServer::sendRequest(req->getData(), SERVER_PORT_NUM, connectPublishers, this);
 	// TODO: make a unique task name
-    xTaskCreate(task, (const signed char*)topic, 250, (void*)this, tskIDLE_PRIORITY + 2, NULL);
+    xTaskCreate(task, (const char*)topic, 250, (void*)this, tskIDLE_PRIORITY + 2, NULL);
     delete req;
 }
 

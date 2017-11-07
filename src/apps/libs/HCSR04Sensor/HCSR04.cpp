@@ -55,7 +55,8 @@ void EXTI0_IRQHandler(void)
 	    EXTI_ClearITPendingBit(EXTI_Line0);
 	}
 	if (taskWoken)
-		vPortYieldFromISR();
+		// vPortYieldFromISR();
+        portYIELD();
 }
 
 

@@ -79,8 +79,8 @@ extern "C" void MainTask(void* args)
     pinMode(GPIO_PD5, OUTPUT);
     pinMode(GPIO_PD6, OUTPUT);
 
-    xTaskCreate(ros_main, (const signed char*)"ROSMain", 128, NULL, 2, NULL);
-	xTaskCreate(led_task, (const signed char*)"LedTask", 128, NULL, 2, NULL);
+    xTaskCreate(ros_main, (const char*)"ROSMain", 128, NULL, 2, NULL);
+	xTaskCreate(led_task, (const char*)"LedTask", 128, NULL, 2, NULL);
 
     vTaskDelete(NULL);
 }
@@ -92,7 +92,7 @@ int main()
 	SystemInit();
 	init_USART1(USART_BAUD_RATE); // initialize USART1 @ 9600 baud
 
-	xTaskCreate(MainTask, (const signed char*)"MainTask", 1024, NULL, 1, NULL);
+	xTaskCreate(MainTask, (const char*)"MainTask", 1024, NULL, 1, NULL);
 	vTaskStartScheduler();
 	return 0;
 }

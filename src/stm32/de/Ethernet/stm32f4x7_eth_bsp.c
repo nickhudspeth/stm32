@@ -247,11 +247,13 @@ void ETH_NVIC_Config(void)
   NVIC_InitTypeDef   NVIC_InitStructure;
 
   /* 2 bit for pre-emption priority, 2 bits for subpriority */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); 
+  /* NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);  */
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); 
   
   /* Enable the Ethernet global Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = ETH_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+  /* NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2; */
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);    

@@ -1,67 +1,70 @@
 /*
-    FreeRTOS V7.1.1 - Copyright (C) 2012 Real Time Engineers Ltd.
-	
+    FreeRTOS V9.0.0 - Copyright (C) 2016 Real Time Engineers Ltd.
+    All rights reserved
 
-    ***************************************************************************
-     *                                                                       *
-     *    FreeRTOS tutorial books are available in pdf and paperback.        *
-     *    Complete, revised, and edited pdf reference manuals are also       *
-     *    available.                                                         *
-     *                                                                       *
-     *    Purchasing FreeRTOS documentation will not only help you, by       *
-     *    ensuring you get running as quickly as possible and with an        *
-     *    in-depth knowledge of how to use FreeRTOS, it will also help       *
-     *    the FreeRTOS project to continue with its mission of providing     *
-     *    professional grade, cross platform, de facto standard solutions    *
-     *    for microcontrollers - completely free of charge!                  *
-     *                                                                       *
-     *    >>> See http://www.FreeRTOS.org/Documentation for details. <<<     *
-     *                                                                       *
-     *    Thank you for using FreeRTOS, and thank you for your support!      *
-     *                                                                       *
-    ***************************************************************************
-
+    VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
 
     This file is part of the FreeRTOS distribution.
 
     FreeRTOS is free software; you can redistribute it and/or modify it under
     the terms of the GNU General Public License (version 2) as published by the
-    Free Software Foundation AND MODIFIED BY the FreeRTOS exception.
-    >>>NOTE<<< The modification to the GPL is included to allow you to
-    distribute a combined work that includes FreeRTOS without being obliged to
-    provide the source code for proprietary components outside of the FreeRTOS
-    kernel.  FreeRTOS is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-    or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-    more details. You should have received a copy of the GNU General Public
-    License and the FreeRTOS license exception along with FreeRTOS; if not it
-    can be viewed here: http://www.freertos.org/a00114.html and also obtained
-    by writing to Richard Barry, contact details for whom are available on the
-    FreeRTOS WEB site.
+    Free Software Foundation >>>> AND MODIFIED BY <<<< the FreeRTOS exception.
+
+    ***************************************************************************
+    >>!   NOTE: The modification to the GPL is included to allow you to     !<<
+    >>!   distribute a combined work that includes FreeRTOS without being   !<<
+    >>!   obliged to provide the source code for proprietary components     !<<
+    >>!   outside of the FreeRTOS kernel.                                   !<<
+    ***************************************************************************
+
+    FreeRTOS is distributed in the hope that it will be useful, but WITHOUT ANY
+    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+    FOR A PARTICULAR PURPOSE.  Full license text is available on the following
+    link: http://www.freertos.org/a00114.html
+
+    ***************************************************************************
+     *                                                                       *
+     *    FreeRTOS provides completely free yet professionally developed,    *
+     *    robust, strictly quality controlled, supported, and cross          *
+     *    platform software that is more than just the market leader, it     *
+     *    is the industry's de facto standard.                               *
+     *                                                                       *
+     *    Help yourself get started quickly while simultaneously helping     *
+     *    to support the FreeRTOS project by purchasing a FreeRTOS           *
+     *    tutorial book, reference manual, or both:                          *
+     *    http://www.FreeRTOS.org/Documentation                              *
+     *                                                                       *
+    ***************************************************************************
+
+    http://www.FreeRTOS.org/FAQHelp.html - Having a problem?  Start by reading
+    the FAQ page "My application does not run, what could be wrong?".  Have you
+    defined configASSERT()?
+
+    http://www.FreeRTOS.org/support - In return for receiving this top quality
+    embedded software for free we request you assist our global community by
+    participating in the support forum.
+
+    http://www.FreeRTOS.org/training - Investing in training allows your team to
+    be as productive as possible as early as possible.  Now you can receive
+    FreeRTOS training directly from Richard Barry, CEO of Real Time Engineers
+    Ltd, and the world's leading authority on the world's leading RTOS.
+
+    http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
+    including FreeRTOS+Trace - an indispensable productivity tool, a DOS
+    compatible FAT file system, and our tiny thread aware UDP/IP stack.
+
+    http://www.FreeRTOS.org/labs - Where new FreeRTOS products go to incubate.
+    Come and try FreeRTOS+TCP, our new open source TCP/IP stack for FreeRTOS.
+
+    http://www.OpenRTOS.com - Real Time Engineers ltd. license FreeRTOS to High
+    Integrity Systems ltd. to sell under the OpenRTOS brand.  Low cost OpenRTOS
+    licenses offer ticketed support, indemnification and commercial middleware.
+
+    http://www.SafeRTOS.com - High Integrity Systems also provide a safety
+    engineered and independently SIL3 certified version for use in safety and
+    mission critical applications that require provable dependability.
 
     1 tab == 4 spaces!
-    
-    ***************************************************************************
-     *                                                                       *
-     *    Having a problem?  Start by reading the FAQ "My application does   *
-     *    not run, what could be wrong?                                      *
-     *                                                                       *
-     *    http://www.FreeRTOS.org/FAQHelp.html                               *
-     *                                                                       *
-    ***************************************************************************
-
-    
-    http://www.FreeRTOS.org - Documentation, training, latest information, 
-    license and contact details.
-    
-    http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
-    including FreeRTOS+Trace - an indispensable productivity tool.
-
-    Real Time Engineers ltd license FreeRTOS to High Integrity Systems, who sell 
-    the code with commercial support, indemnification, and middleware, under 
-    the OpenRTOS brand: http://www.OpenRTOS.com.  High Integrity Systems also
-    provide a safety engineered and independently SIL3 certified version under 
-    the SafeRTOS brand: http://www.SafeRTOS.com.
 */
 
 
@@ -84,7 +87,7 @@
 Changes from V2.0.0
 
 	+ Delay periods are now specified using variables and constants of
-	  portTickType rather than unsigned long.
+	  TickType_t rather than unsigned long.
 
 Changes from V2.1.1
 
@@ -98,9 +101,6 @@ Changes from V2.1.1
 #include "FreeRTOS.h"
 #include "task.h"
 
-/* Definitionen  des Discoverboards*/
-#include "stm32f4_discovery.h"
-
 /* Demo program include files. */
 #include "partest.h"
 #include "flash.h"
@@ -112,7 +112,7 @@ Changes from V2.1.1
 typedef struct LED_PARAMETERS
 {
 	unsigned portBASE_TYPE uxLED;		/*< The output the task should use. */
-	portTickType xFlashRate;	/*< The rate at which the LED should flash. */
+	TickType_t xFlashRate;	/*< The rate at which the LED should flash. */
 } xLEDParameters;
 
 /* The task that is created eight times - each time with a different xLEDParaemtes 
@@ -128,22 +128,21 @@ void vStartLEDFlashTasks( unsigned portBASE_TYPE uxPriority )
 {
 unsigned portBASE_TYPE uxLEDTask;
 xLEDParameters *pxLEDParameters;
-const unsigned portBASE_TYPE uxNumOfLEDs = 4;
-const portTickType xFlashRate = 1000;
+const unsigned portBASE_TYPE uxNumOfLEDs = 8;
+const TickType_t xFlashRate = 125;
 
 	/* Create the eight tasks. */
 	for( uxLEDTask = 0; uxLEDTask < uxNumOfLEDs; ++uxLEDTask )
 	{
 		/* Create and complete the structure used to pass parameters to the next 
 		created task. */
-		STM_EVAL_LEDInit( uxLEDTask);
 		pxLEDParameters = ( xLEDParameters * ) pvPortMalloc( sizeof( xLEDParameters ) );
 		pxLEDParameters->uxLED = uxLEDTask;
-		pxLEDParameters->xFlashRate = ( xFlashRate + ( xFlashRate * ( portTickType ) uxLEDTask ) );
-		pxLEDParameters->xFlashRate /= portTICK_RATE_MS;
+		pxLEDParameters->xFlashRate = ( xFlashRate + ( xFlashRate * ( TickType_t ) uxLEDTask ) );
+		pxLEDParameters->xFlashRate /= portTICK_PERIOD_MS;
 
 		/* Spawn the task. */
-		xTaskCreate( vLEDFlashTask, "LEDx", ledSTACK_SIZE, ( void * ) pxLEDParameters, uxPriority, NULL );
+		xTaskCreate( vLEDFlashTask, "LEDx", ledSTACK_SIZE, ( void * ) pxLEDParameters, uxPriority, ( TaskHandle_t * ) NULL );
 	}
 }
 /*-----------------------------------------------------------*/
@@ -160,11 +159,11 @@ xLEDParameters *pxParameters;
 	for(;;)
 	{
 		/* Delay for half the flash period then turn the LED on. */
-		vTaskDelay( pxParameters->xFlashRate / ( portTickType ) 2 );
+		vTaskDelay( pxParameters->xFlashRate / ( TickType_t ) 2 );
 		vParTestToggleLED( pxParameters->uxLED );
 
 		/* Delay for half the flash period then turn the LED off. */
-		vTaskDelay( pxParameters->xFlashRate / ( portTickType ) 2 );
+		vTaskDelay( pxParameters->xFlashRate / ( TickType_t ) 2 );
 		vParTestToggleLED( pxParameters->uxLED );
 	}
 }
